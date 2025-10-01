@@ -1,10 +1,13 @@
 package com.in28Min.restwebservice.restfullwebservice.user;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -18,6 +21,11 @@ public class UserJPA {
 	private String name;
 	@Past(message = "BithDate must be in the past ")
 	private LocalDate birthDate;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Post> posts;
+	
 
 	public UserJPA() {
 	}

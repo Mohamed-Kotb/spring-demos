@@ -2,8 +2,14 @@ package com.in28Min.restwebservice.restfullwebservice.user;
 
 import java.time.LocalTime;
 
+import org.hibernate.annotations.ManyToAny;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Post {
@@ -14,8 +20,20 @@ public class Post {
 	private String details;
 
 	private LocalTime postTime;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private UserJPA user;
 
 	public Post() {
+	}
+
+	public UserJPA getUser() {
+		return user;
+	}
+
+	public void setUser(UserJPA user) {
+		this.user = user;
 	}
 
 	public Post(Integer id, String details, LocalTime postTime) {
